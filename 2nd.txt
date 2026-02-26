@@ -1,0 +1,198 @@
+SQL> CREATE TABLE ITEM MASTER(
+  2  ID NUMBER(5),
+  3  NAME VARCHAR2(15),
+  4  TYPE VARCHAR2(15),
+  5  PRICE NUMBER(5),
+  6  QUALITY VARCHAR2(10),
+  7  ITEM_PACK_DATE DATE
+  8  );
+CREATE TABLE ITEM MASTER(
+                  *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> CREATE TABLE ITEM_MASTER(
+  2  ID NUMBER(5),
+  3  NAME VARCHAR2(15),
+  4  TYPE VARCHAR2(15),
+  5  PRICE NUMBER(5),
+  6  QUALITY VARCHAR2(10),
+  7  ITEM_PACK_DATE DATE
+  8  );
+
+Table created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(11,'DAIRYMILK','CHOCOLATE',500,'GOOD','12-AUG-2000');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(12,'KAJU KATRI','MITHAI',1000,'VERY GOOD','15-JAN-2016');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(13,'PIZZA','FAST FOOD',350,'AVERAGE','20-FEB-2015');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(14,'ORANGE JUICE','JUICE',50,'BEST','05-FEB-2016');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(15,'VANILLA CAKE','BAKERY ITEM',2000,'GOOD','01-JAN-2016');
+
+1 row created.
+
+SQL> SELECT PRICE,QUALITY,ITEM_PACK_DATE FROM ITEM_MASTER;
+
+     PRICE QUALITY    ITEM_PACK                                                 
+---------- ---------- ---------                                                 
+       500 GOOD       12-AUG-00                                                 
+      1000 VERY GOOD  15-JAN-16                                                 
+       350 AVERAGE    20-FEB-15                                                 
+        50 BEST       05-FEB-16                                                 
+      2000 GOOD       01-JAN-16                                                 
+
+SQL> SELECT * FROM ITEM_MASTER;
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+        11 DAIRYMILK       CHOCOLATE              500 GOOD       12-AUG-00      
+        12 KAJU KATRI      MITHAI                1000 VERY GOOD  15-JAN-16      
+        13 PIZZA           FAST FOOD              350 AVERAGE    20-FEB-15      
+        14 ORANGE JUICE    JUICE                   50 BEST       05-FEB-16      
+        15 VANILLA CAKE    BAKERY ITEM           2000 GOOD       01-JAN-16      
+
+SQL> SELECT * FROM ITEM_MASTER ORDER BY QUALITY;
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+        13 PIZZA           FAST FOOD              350 AVERAGE    20-FEB-15      
+        14 ORANGE JUICE    JUICE                   50 BEST       05-FEB-16      
+        15 VANILLA CAKE    BAKERY ITEM           2000 GOOD       01-JAN-16      
+        11 DAIRYMILK       CHOCOLATE              500 GOOD       12-AUG-00      
+        12 KAJU KATRI      MITHAI                1000 VERY GOOD  15-JAN-16      
+
+SQL> SELECT DISTINCT QUALITY FROM ITEM_MASTER;
+
+QUALITY                                                                         
+----------                                                                      
+GOOD                                                                            
+VERY GOOD                                                                       
+AVERAGE                                                                         
+BEST                                                                            
+
+SQL> UPDATE ITEM_MASTER SET QUALITY='VERY GOOD' WHERE QUALITY='GOOD';
+
+2 rows updated.
+
+SQL> SELECT NAME FROM ITEM_MASTER WHERE QUALITY='VERY GOOD';
+
+NAME                                                                            
+---------------                                                                 
+DAIRYMILK                                                                       
+KAJU KATRI                                                                      
+VANILLA CAKE                                                                    
+
+SQL> ALTER TABLE ITEM_MASTER
+  2  ADD ITEM_PUR_DATE DATE;
+
+Table altered.
+
+SQL> SELECT * FROM ITEM_MASTER;
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        11 DAIRYMILK       CHOCOLATE              500 VERY GOOD  12-AUG-00      
+                                                                                
+                                                                                
+        12 KAJU KATRI      MITHAI                1000 VERY GOOD  15-JAN-16      
+                                                                                
+                                                                                
+        13 PIZZA           FAST FOOD              350 AVERAGE    20-FEB-15      
+                                                                                
+                                                                                
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        14 ORANGE JUICE    JUICE                   50 BEST       05-FEB-16      
+                                                                                
+                                                                                
+        15 VANILLA CAKE    BAKERY ITEM           2000 VERY GOOD  01-JAN-16      
+                                                                                
+                                                                                
+
+SQL> SELECT * FROM ITEM_MASTER WHERE PRICE>500;
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        12 KAJU KATRI      MITHAI                1000 VERY GOOD  15-JAN-16      
+                                                                                
+                                                                                
+        15 VANILLA CAKE    BAKERY ITEM           2000 VERY GOOD  01-JAN-16      
+                                                                                
+                                                                                
+
+SQL> DELETE FROM ITEM_MASTER WHERE PRICE=50;
+
+1 row deleted.
+
+SQL> SELECT * FROM ITEM_MASTER;
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        11 DAIRYMILK       CHOCOLATE              500 VERY GOOD  12-AUG-00      
+                                                                                
+                                                                                
+        12 KAJU KATRI      MITHAI                1000 VERY GOOD  15-JAN-16      
+                                                                                
+                                                                                
+        13 PIZZA           FAST FOOD              350 AVERAGE    20-FEB-15      
+                                                                                
+                                                                                
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        15 VANILLA CAKE    BAKERY ITEM           2000 VERY GOOD  01-JAN-16      
+                                                                                
+                                                                                
+
+SQL> RENAME ITEM_MASTER TO ITEM_DETAIL;
+
+Table renamed.
+
+SQL> SELECT * FROM ITEM_DETAIL;
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        11 DAIRYMILK       CHOCOLATE              500 VERY GOOD  12-AUG-00      
+                                                                                
+                                                                                
+        12 KAJU KATRI      MITHAI                1000 VERY GOOD  15-JAN-16      
+                                                                                
+                                                                                
+        13 PIZZA           FAST FOOD              350 AVERAGE    20-FEB-15      
+                                                                                
+                                                                                
+
+        ID NAME            TYPE                 PRICE QUALITY    ITEM_PACK      
+---------- --------------- --------------- ---------- ---------- ---------      
+ITEM_PUR_                                                                       
+---------                                                                       
+        15 VANILLA CAKE    BAKERY ITEM           2000 VERY GOOD  01-JAN-16      
+                                                                                
+                                                                                
+
+SQL> SPOOL OFF;
