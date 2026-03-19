@@ -1,0 +1,239 @@
+SQL> CREATE TABLE PERSON(
+  2  PERSON_ID NUMBER(1),
+  3  FNAME VARCHAR2(10),
+  4  LNAME VARCHAR2(10),
+  5  CITY VARCHAR2(11),
+  6  SALARY NUMBER(11)
+  7  );
+
+Table created.
+
+SQL> INSERT INTO PERSON VALUES(1,'SNEHA','SHETH','RAJKOT','100000');
+
+1 row created.
+
+SQL> INSERT INTO PERSON VALUES(2,'PUJA','PARMAR','AHMEDABAD','2000');
+
+1 row created.
+
+SQL> INSERT INTO PERSON VALUES(3,'RIYA','GAJAR','PUNE','8000');
+
+1 row created.
+
+SQL> INSERT INTO PERSON VALUES(4,'SANDIP','JADEJA','PUNE','5000');
+
+1 row created.
+
+SQL> INSERT INTO PERSON VALUES(5,'ALPESH','PRAJAPATI','MUMBAI','20000');
+
+1 row created.
+
+SQL> SPOOL OFF;
+SQL> SELECT PERSON_ID FROM PERSON;
+
+ PERSON_ID                                                                      
+----------                                                                      
+         1                                                                      
+         2                                                                      
+         3                                                                      
+         4                                                                      
+         5                                                                      
+
+SQL> SELECT FNAME FROM PERSON;
+
+FNAME                                                                           
+----------                                                                      
+SNEHA                                                                           
+PUJA                                                                            
+RIYA                                                                            
+SANDIP                                                                          
+ALPESH                                                                          
+
+SQL> SELECT PERSON_ID,FNAME FROM PERSON;
+
+ PERSON_ID FNAME                                                                
+---------- ----------                                                           
+         1 SNEHA                                                                
+         2 PUJA                                                                 
+         3 RIYA                                                                 
+         4 SANDIP                                                               
+         5 ALPESH                                                               
+
+SQL> SPOOL OFF;
+SQL> DESC PERSON;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PERSON_ID                                          NUMBER(1)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+ CITY                                               VARCHAR2(11)
+ SALARY                                             NUMBER(11)
+
+SQL> SELECT * FROM PERSON;
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY                         
+---------- ---------- ---------- ----------- ----------                         
+         1 SNEHA      SHETH      RAJKOT          100000                         
+         2 PUJA       PARMAR     AHMEDABAD         2000                         
+         3 RIYA       GAJAR      PUNE              8000                         
+         4 SANDIP     JADEJA     PUNE              5000                         
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+
+SQL> SELECT * FROM PERSON ORDER BY SALARY;
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY                         
+---------- ---------- ---------- ----------- ----------                         
+         2 PUJA       PARMAR     AHMEDABAD         2000                         
+         4 SANDIP     JADEJA     PUNE              5000                         
+         3 RIYA       GAJAR      PUNE              8000                         
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+         1 SNEHA      SHETH      RAJKOT          100000                         
+
+SQL> SELECT DISTINCT CITY FROM PERSON;
+
+CITY                                                                            
+-----------                                                                     
+RAJKOT                                                                          
+AHMEDABAD                                                                       
+PUNE                                                                            
+MUMBAI                                                                          
+
+SQL> UPDATE PERSON SET CITY = 'KOLKATA' WHERE FNAME = 'SANDIP';
+
+1 row updated.
+
+SQL> SELECT FROM PERSON;
+SELECT FROM PERSON
+       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT * FROM PERSON;
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY                         
+---------- ---------- ---------- ----------- ----------                         
+         1 SNEHA      SHETH      RAJKOT          100000                         
+         2 PUJA       PARMAR     AHMEDABAD         2000                         
+         3 RIYA       GAJAR      PUNE              8000                         
+         4 SANDIP     JADEJA     KOLKATA           5000                         
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+
+SQL> SELECT * FROM PERSON WHERE LNAME ='PRAJAPATI';
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY                         
+---------- ---------- ---------- ----------- ----------                         
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+
+SQL> ALTER TABLE PERSON
+  2  ADD STATE VARCHAR2(10);
+
+Table altered.
+
+SQL> ALTER TABLE PERSON
+  2  ADD BIRTHDATE DATE;
+
+Table altered.
+
+SQL> ALTER TABLE PERSON
+  2  ADD PINCODE NUMBER(5);
+
+Table altered.
+
+SQL> SELECT *FROM PERSON;
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY STATE      BIRTHDATE    
+---------- ---------- ---------- ----------- ---------- ---------- ---------    
+   PINCODE                                                                      
+----------                                                                      
+         1 SNEHA      SHETH      RAJKOT          100000                         
+                                                                                
+                                                                                
+         2 PUJA       PARMAR     AHMEDABAD         2000                         
+                                                                                
+                                                                                
+         3 RIYA       GAJAR      PUNE              8000                         
+                                                                                
+                                                                                
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY STATE      BIRTHDATE    
+---------- ---------- ---------- ----------- ---------- ---------- ---------    
+   PINCODE                                                                      
+----------                                                                      
+         4 SANDIP     JADEJA     KOLKATA           5000                         
+                                                                                
+                                                                                
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+                                                                                
+                                                                                
+
+SQL> SELECT *FROM PERSON WHERE SALARY>6000;
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY STATE      BIRTHDATE    
+---------- ---------- ---------- ----------- ---------- ---------- ---------    
+   PINCODE                                                                      
+----------                                                                      
+         1 SNEHA      SHETH      RAJKOT          100000                         
+                                                                                
+                                                                                
+         3 RIYA       GAJAR      PUNE              8000                         
+                                                                                
+                                                                                
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+                                                                                
+                                                                                
+
+SQL> DELETE * FROM PERSON SALARY < 3000;
+DELETE * FROM PERSON SALARY < 3000
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> DELETE * FROM PERSON WHERE SALARY < 3000;
+DELETE * FROM PERSON WHERE SALARY < 3000
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> DELETE FROM PERSON WHERE SALARY <3000;
+
+1 row deleted.
+
+SQL> RENAME TABLE PERSON TO PERSON_MASTER;
+RENAME TABLE PERSON TO PERSON_MASTER
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> RENAME PERSON TO PERSON_MASTER;
+
+Table renamed.
+
+SQL> SELECT * FROM PERSON_MASTER;
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY STATE      BIRTHDATE    
+---------- ---------- ---------- ----------- ---------- ---------- ---------    
+   PINCODE                                                                      
+----------                                                                      
+         1 SNEHA      SHETH      RAJKOT          100000                         
+                                                                                
+                                                                                
+         3 RIYA       GAJAR      PUNE              8000                         
+                                                                                
+                                                                                
+         4 SANDIP     JADEJA     KOLKATA           5000                         
+                                                                                
+                                                                                
+
+ PERSON_ID FNAME      LNAME      CITY            SALARY STATE      BIRTHDATE    
+---------- ---------- ---------- ----------- ---------- ---------- ---------    
+   PINCODE                                                                      
+----------                                                                      
+         5 ALPESH     PRAJAPATI  MUMBAI           20000                         
+                                                                                
+                                                                                
+
+SQL> SPOOL OFF;
